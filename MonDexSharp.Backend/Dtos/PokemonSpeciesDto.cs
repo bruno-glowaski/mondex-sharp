@@ -9,6 +9,6 @@ public record PokemonSpeciesDto(int Id, [Required][MinLength(1)] string Name, Po
 
     public PokemonSpecies ToEntity()
     {
-        return new(Id, Name, BaseStats.ToValueObject());
+        return PokemonSpecies.Create(Id, Name, BaseStats.ToValueObject());
     }
 }
