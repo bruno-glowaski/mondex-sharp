@@ -1,43 +1,54 @@
 using Microsoft.AspNetCore.Mvc;
-
 using MonDexSharp.Backend.Dtos;
+using MonDexSharp.Core.Entities;
+using MonDexSharp.Core.Interfaces.Repositories;
+using MonDexSharp.Core.UseCases;
 
 namespace MonDexSharp.Backend.Controllers;
 
 [ApiController]
 [Route("api/species")]
-public class PokemonSpeciesController : ControllerBase
+public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepository) : ControllerBase
 {
+    private readonly IPokemonSpeciesRepository speciesRepository = speciesRepository;
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<List<PokemonSpeciesDto>> Index()
+    public async Task<ActionResult<List<PokemonSpeciesDto>>> Index()
     {
-        return Ok(new List<PokemonSpeciesDto>() { new(0, "ab", new()) });
+        return Ok(await speciesRepository.All());
     }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<PokemonSpeciesDto> GetById(int id)
+    public async Task<ActionResult<PokemonSpeciesDto>> GetById(int id)
     {
-        return id == 0 ? Ok(new PokemonSpeciesDto(0, "ab", new())) : NotFound();
+        PokemonSpecies? species = await speciesRepository.GetById(id);
+        return species != null ? Ok(new PokemonSpeciesDto(species!)) : NotFound();
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<PokemonSpeciesDto> Create([Bind(["Name", "Stats"])] PokemonSpeciesDto species)
+    public async Task<ActionResult<PokemonSpeciesDto>> Create(PokemonSpeciesDto data, [FromServices] CreatePokemonSpeciesUseCase useCase)
     {
-        return CreatedAtAction(nameof(GetById), new { id = 0 }, species with { Id = 0 });
+        PokemonSpecies entity = data.ToEntity();
+        await useCase.Execute(entity);
+        return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonSpeciesDto(entity));
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<PokemonSpeciesDto> Update(int id, [Bind(["Name", "Stats"])] PokemonSpeciesDto species)
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PokemonSpeciesDto>> Update(int id, PokemonSpeciesDto data, [FromServices] UpdatePokemonSpeciesUseCase useCase)
     {
-        return id == 0 ?
-          CreatedAtAction(nameof(GetById), new { id = 0 }, species with { Id = 0 }) :
-          NotFound();
+        return await useCase.Execute(id, data.ToEntity()) switch
+        {
+            UpdatePokemonSpeciesUseCase.Result.Success => Ok(),
+            UpdatePokemonSpeciesUseCase.Result.NotFound => NotFound(),
+            UpdatePokemonSpeciesUseCase.Result.ChangedId => BadRequest(),
+            _ => throw new InvalidOperationException()
+        };
     }
 }
