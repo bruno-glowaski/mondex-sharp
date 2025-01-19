@@ -4,9 +4,9 @@ using PokemonId = int;
 
 namespace MonDexSharp.Core.Entities;
 
-public class PokemonSpecie
+public class PokemonSpecies
 {
-    public PokemonSpecie(int id, string name, PokemonStats baseStats)
+    public PokemonSpecies(int id, string name, PokemonStats baseStats)
     {
         Id = id;
         this.name = name;

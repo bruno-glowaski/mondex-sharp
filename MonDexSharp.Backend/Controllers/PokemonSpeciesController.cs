@@ -10,34 +10,34 @@ public class PokemonSpeciesController : ControllerBase
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<List<PokemonSpecieDto>> Index()
+    public ActionResult<List<PokemonSpeciesDto>> Index()
     {
-        return Ok(new List<PokemonSpecieDto>() { new(0, "ab", new()) });
+        return Ok(new List<PokemonSpeciesDto>() { new(0, "ab", new()) });
     }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<PokemonSpecieDto> GetById(int id)
+    public ActionResult<PokemonSpeciesDto> GetById(int id)
     {
-        return id == 0 ? Ok(new PokemonSpecieDto(0, "ab", new())) : NotFound();
+        return id == 0 ? Ok(new PokemonSpeciesDto(0, "ab", new())) : NotFound();
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<PokemonSpecieDto> Create([Bind(["Name", "Stats"])] PokemonSpecieDto specie)
+    public ActionResult<PokemonSpeciesDto> Create([Bind(["Name", "Stats"])] PokemonSpeciesDto species)
     {
-        return CreatedAtAction(nameof(GetById), new { id = 0 }, specie with { Id = 0 });
+        return CreatedAtAction(nameof(GetById), new { id = 0 }, species with { Id = 0 });
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<PokemonSpecieDto> Update(int id, [Bind(["Name", "Stats"])] PokemonSpecieDto specie)
+    public ActionResult<PokemonSpeciesDto> Update(int id, [Bind(["Name", "Stats"])] PokemonSpeciesDto species)
     {
         return id == 0 ?
-          CreatedAtAction(nameof(GetById), new { id = 0 }, specie with { Id = 0 }) :
+          CreatedAtAction(nameof(GetById), new { id = 0 }, species with { Id = 0 }) :
           NotFound();
     }
 }
