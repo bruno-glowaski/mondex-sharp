@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using MonDexSharp.Core.ValueObjects;
 
-namespace MonDexSharp.Backend.Dtos;
+namespace MonDexSharp.Backend.Models;
 
-public record struct PokemonStatsDto(
+public readonly record struct PokemonStatsModel(
     [Range(0, int.MaxValue)]
     int HP,
     [Range(0, int.MaxValue)]
@@ -18,9 +18,9 @@ public record struct PokemonStatsDto(
     int Speed
 )
 {
-    public PokemonStatsDto(PokemonStats src) : this(src.HP, src.Attack, src.Defense, src.SpecialAttack, src.SpecialDefense, src.Speed) { }
+    public PokemonStatsModel(PokemonStats src) : this(src.HP, src.Attack, src.Defense, src.SpecialAttack, src.SpecialDefense, src.Speed) { }
 
-    public readonly PokemonStats ToValueObject()
+    public readonly PokemonStats ToDomain()
     {
         return new(HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed);
     }

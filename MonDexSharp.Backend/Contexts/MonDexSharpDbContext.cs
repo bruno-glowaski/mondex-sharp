@@ -1,14 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using MonDexSharp.Core.Entities;
+using MonDexSharp.Backend.Models;
 
 namespace MonDexSharp.Backend.Contexts;
 
 public class MonDexSharpDbContext(DbContextOptions<MonDexSharpDbContext> options) : DbContext(options)
 {
-    public DbSet<PokemonSpecies> Species { get; set; } = null!;
+    public DbSet<PokemonSpeciesModel> Species { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        _ = modelBuilder.Entity<PokemonSpecies>().HasKey(static e => e.Id);
+        _ = modelBuilder.Entity<PokemonSpeciesModel>(static b =>
+        {
+            _ = b.ComplexProperty(static e => e.BaseStats);
+            _ = b.HasKey(static e => e.Id);
+        });
     }
 }

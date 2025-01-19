@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MonDexSharp.Backend.Contexts;
+using MonDexSharp.Backend.Models;
 using MonDexSharp.Core.Entities;
 using MonDexSharp.Core.Interfaces.Repositories;
 
@@ -11,20 +12,22 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
 
     public async Task Create(PokemonSpecies entity)
     {
-        _ = dbContext.Species.Add(entity);
+        _ = dbContext.Species.Add(new(entity));
         _ = await dbContext.SaveChangesAsync();
     }
     public async Task Update(PokemonSpecies entity)
     {
-        dbContext.Entry(entity).State = EntityState.Modified;
+        PokemonSpeciesModel model = await dbContext.Species.FindAsync(entity.Id) ?? throw new KeyNotFoundException();
+        model.Name = entity.Name;
+        model.BaseStats = new(entity.BaseStats);
         _ = await dbContext.SaveChangesAsync();
     }
     public async Task<IEnumerable<PokemonSpecies>> All()
     {
-        return await dbContext.Species.ToListAsync();
+        return await dbContext.Species.Select(static m => m.ToDomain()).ToListAsync();
     }
     public async Task<PokemonSpecies?> GetById(int id)
     {
-        return await dbContext.Species.FindAsync(id);
+        return (await dbContext.Species.FindAsync(id))?.ToDomain();
     }
 }
