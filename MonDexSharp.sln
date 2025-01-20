@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "MonDexSharp.Core\MonDexSharp.Core.csproj", "{5EE32809-6853-458C-825E-B63C636855F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "Core\MonDexSharp.Core.csproj", "{5EE32809-6853-458C-825E-B63C636855F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Backend", "MonDexSharp.Backend\MonDexSharp.Backend.csproj", "{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Backend", "Backend\MonDexSharp.Backend.csproj", "{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
