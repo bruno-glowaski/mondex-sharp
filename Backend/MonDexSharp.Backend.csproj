@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MonDexSharp.Core\MonDexSharp.Core.csproj" />
+    <ProjectReference Include="..\Core\MonDexSharp.Core.csproj" />
   </ItemGroup>
 
 </Project>
