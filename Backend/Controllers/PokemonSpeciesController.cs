@@ -44,11 +44,11 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PokemonSpeciesModel>> Update(int id, PokemonSpeciesModel data, [FromServices] UpdatePokemonSpeciesUseCase useCase)
     {
+        data.Id = id;
         return await useCase.Execute(id, data.ToDomain()) switch
         {
             UpdatePokemonSpeciesUseCase.Result.Success => Ok(),
             UpdatePokemonSpeciesUseCase.Result.NotFound => NotFound(),
-            UpdatePokemonSpeciesUseCase.Result.ChangedId => BadRequest(),
             _ => throw new InvalidOperationException()
         };
     }

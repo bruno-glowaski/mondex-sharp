@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MonDexSharpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MainDb")));
 builder.Services.AddScoped<IPokemonSpeciesRepository, PokemonSpeciesRepository>();
 builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
-builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
+builder.Services.AddScoped<UpdatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<DeletePokemonSpeciesUseCase>();
 builder.Services.AddControllers().AddJsonOptions(static x =>
 {
