@@ -17,8 +17,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PokemonSpeciesModel>> Create(PokemonSpeciesModel data, [FromServices] CreatePokemonSpeciesUseCase useCase)
     {
-        PokemonSpecies entity = data.ToDomain();
-        await useCase.Execute(entity);
+        PokemonSpecies entity = await useCase.Execute(data.ToDomain());
         return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonSpeciesModel(entity));
     }
 

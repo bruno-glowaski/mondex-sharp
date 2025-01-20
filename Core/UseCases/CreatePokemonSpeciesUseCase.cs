@@ -14,8 +14,8 @@ public class CreatePokemonSpeciesUseCase(IPokemonSpeciesRepository speciesReposi
         public sealed record ChangedId() : Result;
     }
 
-    public async Task Execute(PokemonSpecies species)
+    public async Task<PokemonSpecies> Execute(PokemonSpecies species)
     {
-        await speciesRepository.Create(species);
+        return await speciesRepository.Create(species);
     }
 }

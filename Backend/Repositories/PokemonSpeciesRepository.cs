@@ -10,10 +10,12 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
 {
     private readonly MonDexSharpDbContext dbContext = dbContext;
 
-    public async Task Create(PokemonSpecies entity)
+    public async Task<PokemonSpecies> Create(PokemonSpecies entity)
     {
-        _ = dbContext.Species.Add(new(entity));
+        PokemonSpeciesModel model = new(entity);
+        _ = dbContext.Species.Add(model);
         _ = await dbContext.SaveChangesAsync();
+        return PokemonSpecies.Create(model.Id, model.Name, model.BaseStats.ToDomain());
     }
     public async Task<IEnumerable<PokemonSpecies>> All()
     {
