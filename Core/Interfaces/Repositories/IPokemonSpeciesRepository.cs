@@ -8,4 +8,5 @@ public interface IPokemonSpeciesRepository
     Task Update(PokemonSpecies entity);
     Task<IEnumerable<PokemonSpecies>> All();
     Task<PokemonSpecies?> GetById(int id);
+    Task DeleteById(int id);
 }

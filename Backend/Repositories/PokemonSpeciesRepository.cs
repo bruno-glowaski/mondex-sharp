@@ -15,13 +15,6 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
         _ = dbContext.Species.Add(new(entity));
         _ = await dbContext.SaveChangesAsync();
     }
-    public async Task Update(PokemonSpecies entity)
-    {
-        PokemonSpeciesModel model = await dbContext.Species.FindAsync(entity.Id) ?? throw new KeyNotFoundException();
-        model.Name = entity.Name;
-        model.BaseStats = new(entity.BaseStats);
-        _ = await dbContext.SaveChangesAsync();
-    }
     public async Task<IEnumerable<PokemonSpecies>> All()
     {
         return await dbContext.Species.Select(static m => m.ToDomain()).ToListAsync();
@@ -29,5 +22,16 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
     public async Task<PokemonSpecies?> GetById(int id)
     {
         return (await dbContext.Species.FindAsync(id))?.ToDomain();
+    }
+    public async Task Update(PokemonSpecies entity)
+    {
+        PokemonSpeciesModel model = await dbContext.Species.FindAsync(entity.Id) ?? throw new KeyNotFoundException();
+        model.Name = entity.Name;
+        model.BaseStats = new(entity.BaseStats);
+        _ = await dbContext.SaveChangesAsync();
+    }
+    public async Task DeleteById(int id)
+    {
+        _ = await dbContext.Species.Where(m => m.Id == id).ExecuteDeleteAsync();
     }
 }

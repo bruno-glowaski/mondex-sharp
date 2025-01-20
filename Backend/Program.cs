@@ -9,6 +9,7 @@ builder.Services.AddDbContext<MonDexSharpDbContext>(options => options.UseSqlSer
 builder.Services.AddScoped<IPokemonSpeciesRepository, PokemonSpeciesRepository>();
 builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
+builder.Services.AddScoped<DeletePokemonSpeciesUseCase>();
 builder.Services.AddControllers().AddJsonOptions(static x =>
 {
     x.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
