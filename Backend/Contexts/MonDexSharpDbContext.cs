@@ -6,6 +6,7 @@ namespace MonDexSharp.Backend.Contexts;
 public class MonDexSharpDbContext(DbContextOptions<MonDexSharpDbContext> options) : DbContext(options)
 {
     public DbSet<PokemonSpeciesModel> Species { get; set; } = null!;
+    public DbSet<PokemonTypeModel> Types { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
