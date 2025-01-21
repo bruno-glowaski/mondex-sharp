@@ -11,7 +11,7 @@ public class PokemonTypesController(IPokemonTypeRepository typeRepository) : Con
 {
     private readonly IPokemonTypeRepository typeRepository = typeRepository;
 
-    [HttpPost]
+    [HttpPost(Name = "CreatePokemonType")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PokemonTypeDto>> Create(UpsertPokemonTypeDto data)
@@ -20,14 +20,14 @@ public class PokemonTypesController(IPokemonTypeRepository typeRepository) : Con
         return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonTypeDto(entity));
     }
 
-    [HttpGet]
+    [HttpGet(Name = "GetPokemonTypes")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<PokemonTypeDto>>> Index([FromQuery] string? q = null)
     {
         return Ok(await typeRepository.All(name: q));
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetPokemonType")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PokemonTypeDto>> GetById(int id)

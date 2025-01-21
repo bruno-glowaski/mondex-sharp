@@ -13,7 +13,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     private readonly IPokemonSpeciesRepository speciesRepository = speciesRepository;
     private readonly IPokemonTypeRepository typeRepository = typeRepository;
 
-    [HttpPost]
+    [HttpPost(Name = "CreatePokemonSpecies")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PokemonSpeciesDto>> Create(UpsertPokemonSpeciesDto data, [FromServices] CreatePokemonSpeciesUseCase useCase)
@@ -22,14 +22,14 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
         return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonSpeciesDto(entity));
     }
 
-    [HttpGet]
+    [HttpGet(Name = "GetPokemonSpecies")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<PokemonSpeciesDto>>> Index()
     {
         return Ok(await speciesRepository.All());
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetPokemonSpeciesById")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PokemonSpeciesDto>> GetById(int id)
@@ -38,7 +38,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
         return species != null ? Ok(new PokemonSpeciesDto(species)) : NotFound();
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id}", Name = "UpdatePokemonSpecies")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -62,7 +62,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
         };
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeletePokemonSpecies")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id, [FromServices] DeletePokemonSpeciesUseCase useCase)

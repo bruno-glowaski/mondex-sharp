@@ -10,6 +10,7 @@
         "tags": [
           "PokemonSpecies"
         ],
+        "operationId": "CreatePokemonSpecies",
         "requestBody": {
           "content": {
             "application/json": {
@@ -77,6 +78,7 @@
         "tags": [
           "PokemonSpecies"
         ],
+        "operationId": "GetPokemonSpecies",
         "responses": {
           "200": {
             "description": "OK",
@@ -115,6 +117,7 @@
         "tags": [
           "PokemonSpecies"
         ],
+        "operationId": "GetPokemonSpeciesById",
         "parameters": [
           {
             "name": "id",
@@ -173,6 +176,7 @@
         "tags": [
           "PokemonSpecies"
         ],
+        "operationId": "UpdatePokemonSpecies",
         "parameters": [
           {
             "name": "id",
@@ -271,6 +275,7 @@
         "tags": [
           "PokemonSpecies"
         ],
+        "operationId": "DeletePokemonSpecies",
         "parameters": [
           {
             "name": "id",
@@ -314,6 +319,7 @@
         "tags": [
           "PokemonTypes"
         ],
+        "operationId": "CreatePokemonType",
         "requestBody": {
           "content": {
             "application/json": {
@@ -381,6 +387,7 @@
         "tags": [
           "PokemonTypes"
         ],
+        "operationId": "GetPokemonTypes",
         "parameters": [
           {
             "name": "q",
@@ -429,6 +436,7 @@
         "tags": [
           "PokemonTypes"
         ],
+        "operationId": "GetPokemonType",
         "parameters": [
           {
             "name": "id",
