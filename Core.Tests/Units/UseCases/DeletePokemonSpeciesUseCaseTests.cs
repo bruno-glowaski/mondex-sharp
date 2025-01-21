@@ -1,24 +1,25 @@
 using MonDexSharp.Core.Entities;
 using MonDexSharp.Core.Interfaces.Repositories;
+using MonDexSharp.Core.Tests.Factories;
 using MonDexSharp.Core.UseCases;
 
 namespace MonDexSharp.Core.Tests.Units.UseCases;
 
 public class DeletePokemonSpeciesUseCaseTests
 {
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    public async Task DeletingExistingEntries(int speciesId)
+    [Fact]
+    public async Task DeletingExistingEntries()
     {
+        SpeciesFactory speciesFactory = new();
+        PokemonSpecies species = speciesFactory.CreatePikachu();
         Mock<IPokemonSpeciesRepository> speciesRepository = new(MockBehavior.Strict);
-        _ = speciesRepository.Setup(r => r.GetById(speciesId).Result).Returns(PokemonSpecies.Create(speciesId, "FooBar", new()));
-        _ = speciesRepository.Setup(r => r.DeleteById(speciesId)).Returns(Task.CompletedTask);
+        _ = speciesRepository.Setup(r => r.GetById(species.Id).Result).Returns(species);
+        _ = speciesRepository.Setup(r => r.DeleteById(species.Id)).Returns(Task.CompletedTask);
         DeletePokemonSpeciesUseCase useCase = new(speciesRepository.Object);
 
-        Assert.Equal(await useCase.Execute(speciesId), new DeletePokemonSpeciesUseCase.Result.Success());
+        Assert.Equal(await useCase.Execute(species.Id), new DeletePokemonSpeciesUseCase.Result.Success());
 
-        speciesRepository.Verify(r => r.DeleteById(speciesId), Times.Once());
+        speciesRepository.Verify(r => r.DeleteById(species.Id), Times.Once());
     }
 
     [Fact]
