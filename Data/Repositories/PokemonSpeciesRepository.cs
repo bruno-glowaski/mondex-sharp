@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using MonDexSharp.Backend.Contexts;
-using MonDexSharp.Backend.Models;
 using MonDexSharp.Core.Entities;
 using MonDexSharp.Core.Interfaces.Repositories;
+using MonDexSharp.Data.Contexts;
+using MonDexSharp.Data.Models;
 
-namespace MonDexSharp.Backend.Repositories;
+namespace MonDexSharp.Data.Repositories;
 
 public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemonSpeciesRepository
 {

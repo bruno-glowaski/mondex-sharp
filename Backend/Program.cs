@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using MonDexSharp.Backend.Contexts;
-using MonDexSharp.Backend.Repositories;
 using MonDexSharp.Core.Interfaces.Repositories;
 using MonDexSharp.Core.UseCases;
+using MonDexSharp.Data.Contexts;
+using MonDexSharp.Data.Repositories;
 using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

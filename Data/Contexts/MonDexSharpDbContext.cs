@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MonDexSharp.Backend.Models;
+using MonDexSharp.Data.Models;
 
-namespace MonDexSharp.Backend.Contexts;
+namespace MonDexSharp.Data.Contexts;
 
 public class MonDexSharpDbContext(DbContextOptions<MonDexSharpDbContext> options) : DbContext(options)
 {

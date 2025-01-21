@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using MonDexSharp.Core.Entities;
 
-namespace MonDexSharp.Backend.Models;
+namespace MonDexSharp.Data.Models;
 
 public class PokemonSpeciesModel
 {

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MonDexSharp.Backend.Contexts;
+using MonDexSharp.Data.Contexts;
 
 #nullable disable
 
-namespace MonDexSharp.Backend.Migrations
+namespace MonDexSharp.Data.Migrations
 {
     [DbContext(typeof(MonDexSharpDbContext))]
     [Migration("20250119212642_CreatePokemonSpeciesModel")]

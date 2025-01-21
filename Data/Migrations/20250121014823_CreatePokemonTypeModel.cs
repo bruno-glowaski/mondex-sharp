@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MonDexSharp.Backend.Migrations
+namespace MonDexSharp.Data.Migrations
 {
     /// <inheritdoc />
     public partial class CreatePokemonTypeModel : Migration

@@ -1,6 +1,6 @@
 using MonDexSharp.Core.ValueObjects;
 
-namespace MonDexSharp.Backend.Models;
+namespace MonDexSharp.Data.Models;
 
 public readonly record struct PokemonStatsModel(
     int HP,

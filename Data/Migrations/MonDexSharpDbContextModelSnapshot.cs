@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MonDexSharp.Backend.Contexts;
+using MonDexSharp.Data.Contexts;
 
 #nullable disable
 
-namespace MonDexSharp.Backend.Migrations
+namespace MonDexSharp.Data.Migrations
 {
     [DbContext(typeof(MonDexSharpDbContext))]
-    [Migration("20250121014823_CreatePokemonTypeModel")]
-    partial class CreatePokemonTypeModel
+    partial class MonDexSharpDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
