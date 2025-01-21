@@ -11,12 +11,22 @@ services:
       - internal
     depends_on:
       - db
+  worker:
+    build:
+      context: .
+      dockerfile: Worker/Dockerfile
+    networks:
+      - internal
+    depends_on:
+      - db
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
     environment:
       ACCEPT_EULA: Y 
       MSSQL_SA_PASSWORD: 12345Abç
       MSSQL_PID: Express
+    volumes:
+        - ./init.sql:/data/application/init.sql
     networks:
       - internal
 networks:
