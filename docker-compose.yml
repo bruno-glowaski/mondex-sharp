@@ -38,8 +38,6 @@ services:
       ACCEPT_EULA: Y 
       MSSQL_SA_PASSWORD: 12345Abç
       MSSQL_PID: Express
-    volumes:
-        - ./init.sql:/data/application/init.sql
     networks:
       - internal
 networks:
