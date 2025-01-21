@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "MonDexSharp.Frontend",
   "private": true,
   "type": "module",
   "scripts": {
