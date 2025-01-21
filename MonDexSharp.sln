@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "Core\MonDexSharp.Core.csproj", "{5EE32809-6853-458C-825E-B63C636855F1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Backend", "Backend\MonDexSharp.Backend.csproj", "{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{24F514C0-38AC-4DB8-B9CC-8E6391406F4D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core.Tests", "Core.Tests\MonDexSharp.Core.Tests.csproj", "{A42183FD-3407-485F-B83E-CBC98FC5696F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "Core\MonDexSharp.Core.csproj", "{56005AD0-29C4-4855-92A9-DF27BE76B67C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +18,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5EE32809-6853-458C-825E-B63C636855F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EE32809-6853-458C-825E-B63C636855F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EE32809-6853-458C-825E-B63C636855F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EE32809-6853-458C-825E-B63C636855F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EE2BFE1-6C94-495B-9876-A3E93571D0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +26,10 @@ Global
 		{A42183FD-3407-485F-B83E-CBC98FC5696F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42183FD-3407-485F-B83E-CBC98FC5696F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42183FD-3407-485F-B83E-CBC98FC5696F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A42183FD-3407-485F-B83E-CBC98FC5696F} = {24F514C0-38AC-4DB8-B9CC-8E6391406F4D}

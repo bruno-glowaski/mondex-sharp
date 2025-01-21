@@ -8,9 +8,10 @@ using Scalar.AspNetCore;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MonDexSharpDbContext>(options =>
-  options
-    .UseSqlServer(builder.Configuration.GetConnectionString("MainDb"))
-    .EnableSensitiveDataLogging()
+  {
+      _ = options
+        .UseSqlServer(builder.Configuration.GetConnectionString("MainDb"));
+  }
 );
 
 builder.Services.AddScoped<IPokemonSpeciesRepository, PokemonSpeciesRepository>();
@@ -40,6 +41,17 @@ if (app.Environment.IsDevelopment())
 {
     _ = app.MapOpenApi();
     _ = app.MapScalarApiReference();
+}
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    IServiceProvider services = scope.ServiceProvider;
+
+    MonDexSharpDbContext context = services.GetRequiredService<MonDexSharpDbContext>();
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
 }
 
 app.Run();
