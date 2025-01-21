@@ -11,24 +11,15 @@ public class UpdatePokemonSpeciesUseCase(IPokemonSpeciesRepository speciesReposi
 
         public sealed record Success() : Result;
         public sealed record NotFound() : Result;
-        public sealed record ChangedId() : Result;
     }
 
-    public async Task<Result> Execute(int id, PokemonSpecies species)
+    public async Task<Result> Execute(PokemonSpecies species)
     {
-        if (species.Id != id)
-        {
-            return new Result.ChangedId();
-        }
-
-        PokemonSpecies? target = await speciesRepository.GetById(id);
+        PokemonSpecies? target = await speciesRepository.GetById(species.Id!.Value);
         if (target == null)
         {
             return new Result.NotFound();
         }
-
-        // target.Name = species.Name;
-        // target.BaseStats = species.BaseStats;
         await speciesRepository.Update(species);
         return new Result.Success();
     }

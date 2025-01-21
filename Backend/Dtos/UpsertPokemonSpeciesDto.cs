@@ -9,19 +9,21 @@ public record UpsertPokemonSpeciesDto(
   [Required] string Name,
   [Required] string Genera,
   string Description,
-  IEnumerable<int> Types,
+  int[] Types,
   PokemonStatsDto BaseStats
 )
 {
-    public async Task<PokemonSpecies> ToDomain(IPokemonTypeRepository typeRepository)
+    public async Task<PokemonSpecies> ToDomain(IPokemonTypeRepository typeRepository, int? withId = null)
     {
+        IEnumerable<PokemonType> types = (await typeRepository.AllById(Types)).Index()
+          .Select((t) => t.Item ?? throw new KeyNotFoundException($"Could not find type with id '{Types[t.Index]}'"));
         return PokemonSpecies.Create(
-          0,
+          withId,
           Number,
           Name,
           Genera,
           Description,
-          await typeRepository.AllById(Types) ?? throw new KeyNotFoundException($"Could not find one or more of the specified types."),
+          types,
           BaseStats.ToDomain()
         );
     }

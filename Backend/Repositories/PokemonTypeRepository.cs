@@ -29,6 +29,6 @@ public class PokemonTypeRepository(MonDexSharpDbContext dbContext) : IPokemonTyp
     {
         IQueryable<PokemonTypeModel> query = dbContext.Types.Where(t => ids.Contains(t.Id));
         PokemonType[] results = await query.Select(static m => m.ToDomain()).ToArrayAsync();
-        return ids.Select(id => results.First(e => e.Id == id));
+        return ids.Select(id => results.FirstOrDefault(e => e.Id == id));
     }
 }

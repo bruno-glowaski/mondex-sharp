@@ -7,13 +7,13 @@ public class PokemonTypeModel
     public PokemonTypeModel() { Name = ""; } // EF Core
     public PokemonTypeModel(PokemonType entity)
     {
-        Id = entity.Id;
+        Id = entity.Id ?? 0;
         Name = entity.Name;
     }
 
     public int Id { get; }
     public string Name { get; set; }
-    public ICollection<PokemonSpecies> Species { get; } = [];
+    public ICollection<PokemonSpeciesModel> Species { get; } = [];
 
     public PokemonType ToDomain()
     {

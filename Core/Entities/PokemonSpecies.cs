@@ -5,7 +5,7 @@ namespace MonDexSharp.Core.Entities;
 
 public class PokemonSpecies
 {
-    private PokemonSpecies(int id, int number, string name, string genera, string description, IEnumerable<PokemonType> types, PokemonStats baseStats)
+    private PokemonSpecies(int? id, int number, string name, string genera, string description, IEnumerable<PokemonType> types, PokemonStats baseStats)
     {
         Id = id;
         Number = number;
@@ -16,8 +16,7 @@ public class PokemonSpecies
         BaseStats = baseStats;
     }
 
-    [Range(0, int.MaxValue)]
-    public int Id { get; }
+    public int? Id { get; }
     [Range(0, int.MaxValue)]
     public int Number { get; set; }
     [Required]
@@ -30,7 +29,7 @@ public class PokemonSpecies
     public IReadOnlyList<PokemonType> Types { get; }
     public PokemonStats BaseStats { get; set; }
 
-    public static PokemonSpecies Create(int id, int number, string name, string genera, string description, IEnumerable<PokemonType> types, PokemonStats baseStats)
+    public static PokemonSpecies Create(int? id, int number, string name, string genera, string description, IEnumerable<PokemonType> types, PokemonStats baseStats)
     {
         PokemonSpecies result = new(id, number, name, genera, description, types, baseStats);
         Validator.ValidateObject(result, new(result));

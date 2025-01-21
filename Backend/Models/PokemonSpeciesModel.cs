@@ -5,21 +5,13 @@ namespace MonDexSharp.Backend.Models;
 
 public class PokemonSpeciesModel
 {
-    public PokemonSpeciesModel() { }
-    public PokemonSpeciesModel(PokemonSpecies entity)
-    {
-        Id = entity.Id;
-        Name = entity.Name;
-        BaseStats = new(entity.BaseStats);
-    }
-
     [Key]
-    public int Id { get; }
-    public required int Number { get; set; }
-    public required string Name { get; set; }
-    public required string Genera { get; set; }
-    public required string Description { get; set; }
-    public required ICollection<PokemonTypeModel> Types { get; set; }
+    public required int Id { get; init; }
+    public int Number { get; set; }
+    public string Name { get; set; } = "";
+    public string Genera { get; set; } = "";
+    public string Description { get; set; } = "";
+    public ICollection<PokemonTypeModel> Types { get; set; } = [];
     public PokemonStatsModel BaseStats { get; set; }
 
     public PokemonSpecies ToDomain()

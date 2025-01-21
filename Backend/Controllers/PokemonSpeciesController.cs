@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MonDexSharp.Backend.Models;
+using MonDexSharp.Backend.Dtos;
 using MonDexSharp.Core.Entities;
 using MonDexSharp.Core.Interfaces.Repositories;
 using MonDexSharp.Core.UseCases;
@@ -8,22 +8,23 @@ namespace MonDexSharp.Backend.Controllers;
 
 [ApiController]
 [Route("api/species")]
-public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepository) : ControllerBase
+public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepository, IPokemonTypeRepository typeRepository) : ControllerBase
 {
     private readonly IPokemonSpeciesRepository speciesRepository = speciesRepository;
+    private readonly IPokemonTypeRepository typeRepository = typeRepository;
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<PokemonSpeciesModel>> Create(PokemonSpeciesModel data, [FromServices] CreatePokemonSpeciesUseCase useCase)
+    public async Task<ActionResult<PokemonSpeciesDto>> Create(UpsertPokemonSpeciesDto data, [FromServices] CreatePokemonSpeciesUseCase useCase)
     {
-        PokemonSpecies entity = await useCase.Execute(data.ToDomain());
-        return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonSpeciesModel(entity));
+        PokemonSpecies entity = await useCase.Execute(await data.ToDomain(typeRepository));
+        return CreatedAtAction(nameof(GetById), new { id = entity.Id }, new PokemonSpeciesDto(entity));
     }
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<PokemonSpeciesModel>>> Index()
+    public async Task<ActionResult<List<PokemonSpeciesDto>>> Index()
     {
         return Ok(await speciesRepository.All());
     }
@@ -31,20 +32,29 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<PokemonSpeciesModel>> GetById(int id)
+    public async Task<ActionResult<PokemonSpeciesDto>> GetById(int id)
     {
         PokemonSpecies? species = await speciesRepository.GetById(id);
-        return species != null ? Ok(new PokemonSpeciesModel(species!)) : NotFound();
+        return species != null ? Ok(new PokemonSpeciesDto(species)) : NotFound();
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<PokemonSpeciesModel>> Update(int id, PokemonSpeciesModel data, [FromServices] UpdatePokemonSpeciesUseCase useCase)
+    public async Task<ActionResult<PokemonSpeciesDto>> Update(int id, UpsertPokemonSpeciesDto data, [FromServices] UpdatePokemonSpeciesUseCase useCase)
     {
-        data.Id = id;
-        return await useCase.Execute(id, data.ToDomain()) switch
+        PokemonSpecies entity;
+        try
+        {
+            entity = await data.ToDomain(typeRepository, withId: id);
+        }
+        catch (KeyNotFoundException e)
+        {
+            ModelState.AddModelError(nameof(data.Types), e.Message);
+            return ValidationProblem();
+        }
+        return await useCase.Execute(entity) switch
         {
             UpdatePokemonSpeciesUseCase.Result.Success => Ok(),
             UpdatePokemonSpeciesUseCase.Result.NotFound => NotFound(),
@@ -55,7 +65,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> Update(int id, [FromServices] DeletePokemonSpeciesUseCase useCase)
+    public async Task<ActionResult> Delete(int id, [FromServices] DeletePokemonSpeciesUseCase useCase)
     {
         return await useCase.Execute(id) switch
         {
