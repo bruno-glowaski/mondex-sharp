@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core.Tests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "Core\MonDexSharp.Core.csproj", "{56005AD0-29C4-4855-92A9-DF27BE76B67C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Worker", "Worker\MonDexSharp.Worker.csproj", "{B61F635B-6486-4AC0-94C0-B6D75B2C1854}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{904D9F9D-F3F6-417B-A59F-740DFC09DD49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Jobs.Healthcheck", "Jobs\Healthcheck\MonDexSharp.Jobs.Healthcheck.csproj", "{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,8 +36,17 @@ Global
 		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56005AD0-29C4-4855-92A9-DF27BE76B67C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B61F635B-6486-4AC0-94C0-B6D75B2C1854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B61F635B-6486-4AC0-94C0-B6D75B2C1854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B61F635B-6486-4AC0-94C0-B6D75B2C1854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B61F635B-6486-4AC0-94C0-B6D75B2C1854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A42183FD-3407-485F-B83E-CBC98FC5696F} = {24F514C0-38AC-4DB8-B9CC-8E6391406F4D}
+		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F} = {904D9F9D-F3F6-417B-A59F-740DFC09DD49}
 	EndGlobalSection
 EndGlobal

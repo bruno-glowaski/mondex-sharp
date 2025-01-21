@@ -4,7 +4,11 @@ WORKDIR /source
 COPY *.sln .
 COPY ./Core/*.csproj ./Core/
 COPY ./Backend/*.csproj ./Backend/
-RUN dotnet sln remove Core.Tests/MonDexSharp.Core.Tests.csproj
+RUN dotnet sln remove \
+  Core.Tests/MonDexSharp.Core.Tests.csproj \
+  Worker/MonDexSharp.Worker.csproj \
+  Jobs \
+  Jobs/Healthcheck/MonDexSharp.Jobs.Healthcheck.csproj
 RUN dotnet restore
 
 COPY ./Core/. ./Core/
