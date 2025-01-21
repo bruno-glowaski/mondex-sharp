@@ -21,9 +21,9 @@ public class PokemonTypeRepository(MonDexSharpDbContext dbContext) : IPokemonTyp
     {
         return (await dbContext.Types.FindAsync(id))?.ToDomain();
     }
-    public async Task<IEnumerable<PokemonType>> All()
+    public async Task<IEnumerable<PokemonType>> All(string? name = null)
     {
-        return await dbContext.Types.Select(static m => m.ToDomain()).ToListAsync();
+        return await dbContext.Types.Where(t => name == null || t.Name.Contains(name!)).Select(static m => m.ToDomain()).ToListAsync();
     }
     public async Task<IEnumerable<PokemonType?>> AllById(IEnumerable<int> ids)
     {

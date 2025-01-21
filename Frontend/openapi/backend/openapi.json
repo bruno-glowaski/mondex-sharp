@@ -381,6 +381,16 @@
         "tags": [
           "PokemonTypes"
         ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

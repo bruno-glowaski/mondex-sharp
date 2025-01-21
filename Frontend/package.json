@@ -10,10 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vee-validate/nuxt": "^4.15.0",
+    "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.4.0",
     "nuxt": "^3.15.2",
     "vue": "latest",
     "vue-router": "latest",
-    "vuetify-nuxt-module": "^0.18.3"
+    "vuetify-nuxt-module": "^0.18.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "nuxt-open-fetch": "^0.9.5"
   }
 }

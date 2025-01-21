@@ -22,9 +22,9 @@ public class PokemonTypesController(IPokemonTypeRepository typeRepository) : Con
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<PokemonTypeDto>>> Index()
+    public async Task<ActionResult<List<PokemonTypeDto>>> Index([FromQuery] string? q = null)
     {
-        return Ok(await typeRepository.All());
+        return Ok(await typeRepository.All(name: q));
     }
 
     [HttpGet("{id}")]

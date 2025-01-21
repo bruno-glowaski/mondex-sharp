@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
 {
     // For simplicity and time saving, we are exposing the backend directly. The correct way would be to make the frontend
     // redirect requests so only the frontend can connect to it.
-    options.AddDefaultPolicy(policy => { _ = policy.WithOrigins("*"); });
+    options.AddDefaultPolicy(policy => { _ = policy.AllowAnyOrigin(); });
 });
 builder.Services.ConfigureHttpJsonOptions(static o =>
 {
@@ -53,14 +53,23 @@ if (app.Environment.IsDevelopment())
 }
 app.MapHealthChecks("health");
 
-using (IServiceScope scope = app.Services.CreateScope())
+if (bool.TryParse(app.Configuration["RunMigrations"], out bool runMigrations) && runMigrations)
 {
+    using IServiceScope scope = app.Services.CreateScope();
+
     IServiceProvider services = scope.ServiceProvider;
 
-    MonDexSharpDbContext context = services.GetRequiredService<MonDexSharpDbContext>();
-    if (context.Database.GetPendingMigrations().Any())
+    try
     {
-        context.Database.Migrate();
+        MonDexSharpDbContext context = services.GetRequiredService<MonDexSharpDbContext>();
+        if (context.Database.GetPendingMigrations().Any())
+        {
+            context.Database.Migrate();
+        }
+    }
+    catch (Microsoft.Data.SqlClient.SqlException)
+    {
+        app.Logger.LogError("Could not apply migrations. Database might be outdated.");
     }
 }
 
