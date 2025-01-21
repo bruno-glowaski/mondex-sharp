@@ -1,17 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /source
 
-COPY *.sln .
+COPY MonDexSharp.Backend.sln .
 COPY ./Core/*.csproj ./Core/
+COPY ./Data/*.csproj ./Data/
 COPY ./Backend/*.csproj ./Backend/
-RUN dotnet sln remove \
-  Core.Tests/MonDexSharp.Core.Tests.csproj \
-  Worker/MonDexSharp.Worker.csproj \
-  Jobs \
-  Jobs/Healthcheck/MonDexSharp.Jobs.Healthcheck.csproj
 RUN dotnet restore
 
 COPY ./Core/. ./Core/
+COPY ./Data/. ./Data/
 COPY ./Backend/. ./Backend/
 WORKDIR /source/Backend
 RUN dotnet publish -c release -o /app

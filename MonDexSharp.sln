@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{904D9F9D-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Jobs.Healthcheck", "Jobs\Healthcheck\MonDexSharp.Jobs.Healthcheck.csproj", "{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Jobs.PokeApiImporter", "Jobs\PokeApiImporter\MonDexSharp.Jobs.PokeApiImporter.csproj", "{4FE4DF99-8959-46D8-92AD-0143799D5033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Data", "Data\MonDexSharp.Data.csproj", "{77F8E945-08B6-467B-A533-04ECD57E9D85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +48,18 @@ Global
 		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE4DF99-8959-46D8-92AD-0143799D5033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE4DF99-8959-46D8-92AD-0143799D5033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE4DF99-8959-46D8-92AD-0143799D5033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE4DF99-8959-46D8-92AD-0143799D5033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F8E945-08B6-467B-A533-04ECD57E9D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F8E945-08B6-467B-A533-04ECD57E9D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F8E945-08B6-467B-A533-04ECD57E9D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F8E945-08B6-467B-A533-04ECD57E9D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A42183FD-3407-485F-B83E-CBC98FC5696F} = {24F514C0-38AC-4DB8-B9CC-8E6391406F4D}
 		{993B8CA3-CF14-4DCA-9B3F-9540EEF0B74F} = {904D9F9D-F3F6-417B-A59F-740DFC09DD49}
+		{4FE4DF99-8959-46D8-92AD-0143799D5033} = {904D9F9D-F3F6-417B-A59F-740DFC09DD49}
 	EndGlobalSection
 EndGlobal

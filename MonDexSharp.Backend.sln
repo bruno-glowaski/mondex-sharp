@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Backend", "Backend\MonDexSharp.Backend.csproj", "{D3060460-1466-4A65-A43D-C0D698BF9AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Core", "Core\MonDexSharp.Core.csproj", "{C9FE7AFC-2E65-47C5-A2D0-602A0B67D8E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDexSharp.Data", "Data\MonDexSharp.Data.csproj", "{90DC0C4E-292D-4F39-A1DF-ED1D15424ADA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3060460-1466-4A65-A43D-C0D698BF9AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3060460-1466-4A65-A43D-C0D698BF9AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3060460-1466-4A65-A43D-C0D698BF9AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3060460-1466-4A65-A43D-C0D698BF9AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9FE7AFC-2E65-47C5-A2D0-602A0B67D8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9FE7AFC-2E65-47C5-A2D0-602A0B67D8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9FE7AFC-2E65-47C5-A2D0-602A0B67D8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9FE7AFC-2E65-47C5-A2D0-602A0B67D8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90DC0C4E-292D-4F39-A1DF-ED1D15424ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DC0C4E-292D-4F39-A1DF-ED1D15424ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DC0C4E-292D-4F39-A1DF-ED1D15424ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DC0C4E-292D-4F39-A1DF-ED1D15424ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
