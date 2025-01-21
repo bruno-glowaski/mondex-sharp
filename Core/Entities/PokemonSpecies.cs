@@ -24,7 +24,6 @@ public class PokemonSpecies
     public string Name { get; set; }
     [Required]
     public string Genera { get; set; }
-    [Required]
     public string Description { get; set; }
     [MinLength(1)]
     [MaxLength(2)]
