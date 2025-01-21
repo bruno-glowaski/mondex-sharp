@@ -27,7 +27,12 @@ builder.Services.AddCors(options =>
 {
     // For simplicity and time saving, we are exposing the backend directly. The correct way would be to make the frontend
     // redirect requests so only the frontend can connect to it.
-    options.AddDefaultPolicy(policy => { _ = policy.AllowAnyOrigin(); });
+    options.AddDefaultPolicy(policy =>
+    {
+        _ = policy.AllowAnyOrigin();
+        _ = policy.AllowAnyMethod();
+        _ = policy.AllowAnyHeader();
+    });
 });
 builder.Services.ConfigureHttpJsonOptions(static o =>
 {
