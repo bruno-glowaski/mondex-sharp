@@ -10,7 +10,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MonDexSharpDbContext>(options =>
   {
       _ = options
-        .UseSqlServer(builder.Configuration.GetConnectionString("MainDb"));
+        .UseSqlServer(builder.Configuration.GetConnectionString("MainDb"),
+          options => options.EnableRetryOnFailure()
+      );
   }
 );
 
@@ -29,6 +31,7 @@ builder.Services.AddControllers().AddJsonOptions(static x =>
 {
     x.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
 });
+builder.Services.AddHealthChecks();
 
 builder.Services.AddOpenApi();
 
@@ -42,6 +45,7 @@ if (app.Environment.IsDevelopment())
     _ = app.MapOpenApi();
     _ = app.MapScalarApiReference();
 }
+app.MapHealthChecks("health");
 
 using (IServiceScope scope = app.Services.CreateScope())
 {
