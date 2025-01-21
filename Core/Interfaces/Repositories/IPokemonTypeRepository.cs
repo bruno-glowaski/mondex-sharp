@@ -8,4 +8,6 @@ public interface IPokemonTypeRepository
     Task<PokemonType?> GetById(int id);
     Task<IEnumerable<PokemonType>> All(string? name = null);
     Task<IEnumerable<PokemonType?>> AllById(IEnumerable<int> ids);
+    Task Update(PokemonType entity);
+    Task DeleteById(int id);
 }

@@ -5,8 +5,8 @@ namespace MonDexSharp.Backend.Dtos;
 
 public record UpsertPokemonTypeDto([Required] string Name)
 {
-    public PokemonType ToDomain()
+    public PokemonType ToDomain(int? withId = null)
     {
-        return PokemonType.Create(0, Name);
+        return PokemonType.Create(withId ?? 0, Name);
     }
 }

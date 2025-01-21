@@ -35,4 +35,32 @@ public class PokemonTypesController(IPokemonTypeRepository typeRepository) : Con
         PokemonType? entity = await typeRepository.GetById(id);
         return entity != null ? Ok(new PokemonTypeDto(entity!)) : NotFound();
     }
+
+    [HttpPut("{id}", Name = "UpdatePokemonType")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Update(int id, UpsertPokemonTypeDto data)
+    {
+        PokemonType? entity = await typeRepository.GetById(id);
+        if (entity == null)
+        {
+            return NotFound();
+        }
+        entity.Name = data.Name;
+        await typeRepository.Update(entity);
+        return entity != null ? Ok(new PokemonTypeDto(entity!)) : NotFound();
+    }
+
+    [HttpDelete("{id}", Name = "DeletePokemonType")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Delete(int id)
+    {
+        if (await typeRepository.GetById(id) == null)
+        {
+            return NotFound();
+        }
+        await typeRepository.DeleteById(id);
+        return Ok();
+    }
 }

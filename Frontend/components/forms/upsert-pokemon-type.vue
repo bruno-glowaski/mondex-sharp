@@ -1,6 +1,6 @@
 <template>
   <form @submit="onSubmit">
-    <v-card title="Create new">
+    <v-card :title="title">
       <v-card-text>
         <v-text-field
           label="Name"
@@ -29,6 +29,7 @@ export type UpsertPokemonType = z.infer<typeof UpsertPokemonTypeSchema>;
 <script setup lang="ts">
 import { z } from "zod";
 
+defineProps<{ title: string }>();
 const emit = defineEmits<{
   (e: "submit", data: UpsertPokemonType): Promise<void>;
   (e: "close"): void;

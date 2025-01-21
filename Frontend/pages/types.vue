@@ -32,6 +32,7 @@
             </template>
             <template #default="{ isActive }">
               <FormsUpsertPokemonType
+                title="Create new"
                 @close="isActive.value = false"
                 @submit="submitNewType"
               />
@@ -44,15 +45,71 @@
       <v-chip color="primary">{{ value }}</v-chip>
     </template>
     <template #item.actions="{ item }">
-      <v-btn
-        icon="mdi-delete"
-        aria-label="Delete"
-        class="me-2"
-        size="small"
-        color="error"
-        variant="text"
-        @click="console.log(item)"
-      />
+      {{
+        null /* Yes, this isn't particularly efficient, but I'm time constrained */
+      }}
+      {{
+        null /* The correct thing would be to use only one dialog and multiplex it between the items */
+      }}
+      <v-dialog>
+        <template #activator="{ props }">
+          <v-btn
+            v-bind="props"
+            icon="mdi-pencil"
+            aria-label="Update"
+            class="me-2"
+            size="small"
+            color="secondary"
+            variant="text"
+          />
+        </template>
+        <template #default="{ isActive }">
+          <FormsUpsertPokemonType
+            title="Edit existing"
+            @close="isActive.value = false"
+            @submit="(value) => updateTypeById(item.id, value)"
+          />
+        </template>
+      </v-dialog>
+      <v-dialog max-width="500px">
+        <template #activator="{ props }">
+          <v-btn
+            v-bind="props"
+            icon="mdi-delete"
+            aria-label="Delete"
+            class="me-2"
+            size="small"
+            color="error"
+            variant="text"
+          />
+        </template>
+        <template #default="{ isActive }">
+          <v-card>
+            <v-card-title class="text-h5"
+              >Are you sure you want to delete this item?</v-card-title
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn variant="text" @click="isActive.value = false">
+                Cancel
+              </v-btn>
+              <v-btn
+                color="error"
+                variant="flat"
+                @click="
+                  async () => {
+                    await deleteTypeById(item.id);
+                    isActive.value = false;
+                  }
+                "
+              >
+                OK
+              </v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-dialog>
     </template>
   </v-data-table-server>
 </template>
@@ -67,7 +124,7 @@ const debouncedSearch = refDebounced(search, 1000);
 const headers = [
   { key: "id", title: "Id", fixed: true, width: 0 },
   { key: "name", title: "Name" },
-  { key: "actions", title: "Actions", fixed: true },
+  { key: "actions", title: "Actions", fixed: true, width: "200px" },
 ];
 
 const { $backend } = useNuxtApp();
@@ -81,6 +138,23 @@ const {
 
 const submitNewType = async (value: UpsertPokemonType) => {
   await $backend("/api/types", { method: "POST", body: value });
+  refresh();
+};
+
+const updateTypeById = async (id: number, value: UpsertPokemonType) => {
+  await $backend("/api/types/{id}", {
+    method: "PUT",
+    path: { id },
+    body: value,
+  });
+  refresh();
+};
+
+const deleteTypeById = async (id: number) => {
+  await $backend("/api/types/{id}", {
+    method: "DELETE",
+    path: { id },
+  });
   refresh();
 };
 </script>

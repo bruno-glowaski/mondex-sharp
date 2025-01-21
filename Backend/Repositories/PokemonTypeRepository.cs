@@ -31,4 +31,19 @@ public class PokemonTypeRepository(MonDexSharpDbContext dbContext) : IPokemonTyp
         PokemonType[] results = await query.Select(static m => m.ToDomain()).ToArrayAsync();
         return ids.Select(id => results.FirstOrDefault(e => e.Id == id));
     }
+    public async Task Update(PokemonType entity)
+    {
+        PokemonTypeModel model = await dbContext.Types.FindAsync(entity.Id) ?? throw new KeyNotFoundException();
+        ApplyOntoModel(model, entity);
+        _ = await dbContext.SaveChangesAsync();
+    }
+    public async Task DeleteById(int id)
+    {
+        _ = await dbContext.Types.Where(m => m.Id == id).ExecuteDeleteAsync();
+    }
+
+    private static void ApplyOntoModel(PokemonTypeModel dest, PokemonType src)
+    {
+        dest.Name = src.Name;
+    }
 }
