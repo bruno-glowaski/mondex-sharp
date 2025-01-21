@@ -23,6 +23,12 @@ builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<UpdatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<DeletePokemonSpeciesUseCase>();
 
+builder.Services.AddCors(options =>
+{
+    // For simplicity and time saving, we are exposing the backend directly. The correct way would be to make the frontend
+    // redirect requests so only the frontend can connect to it.
+    options.AddDefaultPolicy(policy => { _ = policy.WithOrigins("*"); });
+});
 builder.Services.ConfigureHttpJsonOptions(static o =>
 {
     o.SerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
@@ -32,13 +38,13 @@ builder.Services.AddControllers().AddJsonOptions(static x =>
     x.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.SnakeCaseLower;
 });
 builder.Services.AddHealthChecks();
-
 builder.Services.AddOpenApi();
 
 WebApplication app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors();
 app.MapControllers();
 if (app.Environment.IsDevelopment())
 {
