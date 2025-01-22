@@ -5,14 +5,15 @@ export default defineNuxtConfig({
   modules: ["@vee-validate/nuxt", "nuxt-open-fetch", "vuetify-nuxt-module"],
   runtimeConfig: {
     public: {
-      openFetch: {
-        backend: { baseURL: "http://localhost:5161" },
+      backend: {
+        baseURL: "http://localhost:5161",
       },
     },
   },
   openFetch: {
     clients: {
-      backend: { baseURL: "http://localhost:5161" },
+      backend: { baseURL: "/api/backend" },
     },
   },
-} as any);
+});
+

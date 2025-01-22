@@ -3,8 +3,6 @@ services:
     build:
       context: .
       dockerfile: Backend/Dockerfile
-    ports:
-      - "8000:80"
     environment:
       ASPNETCORE_HTTP_PORTS: 80
       ASPNETCORE_RUNMIGRATIONS: true
@@ -19,7 +17,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NUXT_PUBLIC_OPEN_FETCH_BACKEND_BASE_URL: "http://localhost:8000"
+      NUXT_PUBLIC_BACKEND_BASE_URL: "http://backend:80"
     networks:
       - internal
     depends_on:
