@@ -136,7 +136,6 @@ const {
 } = await useBackend("/api/types", {
   query: { q: debouncedSearch },
 });
-console.log(error);
 
 const submitNewType = async (value: UpsertPokemonType) => {
   await $backend("/api/types", { method: "POST", body: value });
