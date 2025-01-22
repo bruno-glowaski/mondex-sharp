@@ -30,6 +30,8 @@ services:
       - internal
     depends_on:
       - db
+    extra_hosts:
+      - "mail.host:host-gateway"
   db:
     image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
     environment:
