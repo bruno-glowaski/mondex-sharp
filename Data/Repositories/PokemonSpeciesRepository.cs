@@ -21,6 +21,10 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
     {
         return (await AllQuery().ToArrayAsync()).Select(static m => m.ToDomain());
     }
+    public async Task<bool> AnyWithTypeId(int typeId)
+    {
+        return await AllQuery().AnyAsync(m => m.Types.Any(m => m.Id == typeId));
+    }
     public async Task<PokemonSpecies?> GetById(int id)
     {
         return (await AllQuery().SingleAsync(m => m.Id == id))?.ToDomain();

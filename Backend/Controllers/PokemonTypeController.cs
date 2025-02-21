@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MonDexSharp.Backend.Dtos;
 using MonDexSharp.Core.Entities;
 using MonDexSharp.Core.Interfaces.Repositories;
+using MonDexSharp.Core.UseCases;
 
 namespace MonDexSharp.Backend.Controllers;
 
@@ -54,13 +55,19 @@ public class PokemonTypesController(IPokemonTypeRepository typeRepository) : Con
     [HttpDelete("{id}", Name = "DeletePokemonType")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(int id, [FromServices] DeletePokemonTypeUseCase useCase)
     {
-        if (await typeRepository.GetById(id) == null)
+        switch (await useCase.Execute(id))
         {
-            return NotFound();
+            case DeletePokemonTypeUseCase.Result.Success:
+                return Ok();
+            case DeletePokemonTypeUseCase.Result.NotFound:
+                return NotFound();
+            case DeletePokemonTypeUseCase.Result.WillOrphanPokemons:
+                ModelState.AddModelError("", "There are species with this type. Delete them first");
+                return UnprocessableEntity(ModelState);
+            default:
+                throw new InvalidOperationException();
         }
-        await typeRepository.DeleteById(id);
-        return Ok();
     }
 }

@@ -23,6 +23,8 @@ builder.Services.AddScoped<CreatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<UpdatePokemonSpeciesUseCase>();
 builder.Services.AddScoped<DeletePokemonSpeciesUseCase>();
 
+builder.Services.AddScoped<DeletePokemonTypeUseCase>();
+
 builder.Services.AddCors(options =>
 {
     // For simplicity and time saving, we are exposing the backend directly. The correct way would be to make the frontend
