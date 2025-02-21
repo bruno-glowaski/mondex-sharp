@@ -7,6 +7,7 @@ public interface IPokemonSpeciesRepository
     Task<PokemonSpecies> Create(PokemonSpecies entity);
     Task Update(PokemonSpecies entity);
     Task<IEnumerable<PokemonSpecies>> All();
+    Task<bool> AnyWithTypeId(int typeId);
     Task<PokemonSpecies?> GetById(int id);
     Task DeleteById(int id);
 }

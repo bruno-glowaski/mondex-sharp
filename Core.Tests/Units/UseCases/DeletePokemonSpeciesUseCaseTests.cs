@@ -12,14 +12,15 @@ public class DeletePokemonSpeciesUseCaseTests
     {
         SpeciesFactory speciesFactory = new();
         PokemonSpecies species = speciesFactory.CreatePikachu();
+        int speciesId = species.Id!.Value;
         Mock<IPokemonSpeciesRepository> speciesRepository = new(MockBehavior.Strict);
-        _ = speciesRepository.Setup(r => r.GetById(species.Id).Result).Returns(species);
-        _ = speciesRepository.Setup(r => r.DeleteById(species.Id)).Returns(Task.CompletedTask);
+        _ = speciesRepository.Setup(r => r.GetById(speciesId).Result).Returns(species);
+        _ = speciesRepository.Setup(r => r.DeleteById(speciesId)).Returns(Task.CompletedTask);
         DeletePokemonSpeciesUseCase useCase = new(speciesRepository.Object);
 
-        Assert.Equal(await useCase.Execute(species.Id), new DeletePokemonSpeciesUseCase.Result.Success());
+        Assert.Equal(await useCase.Execute(speciesId), new DeletePokemonSpeciesUseCase.Result.Success());
 
-        speciesRepository.Verify(r => r.DeleteById(species.Id), Times.Once());
+        speciesRepository.Verify(r => r.DeleteById(speciesId), Times.Once());
     }
 
     [Fact]
