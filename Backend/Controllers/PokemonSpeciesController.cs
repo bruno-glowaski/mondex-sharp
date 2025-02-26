@@ -24,9 +24,10 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
 
     [HttpGet(Name = "GetPokemonSpecies")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<PokemonSpeciesDto>>> Index()
+    public async Task<ActionResult<List<PokemonSpeciesDto>>> Index([FromQuery] string? q = null)
     {
-        return Ok((await speciesRepository.All()).Select(static m => new PokemonSpeciesDto(m)));
+        Console.WriteLine($"Query: {q}");
+        return Ok((await speciesRepository.All(query: q)).Select(static m => new PokemonSpeciesDto(m)));
     }
 
     [HttpGet("{id}", Name = "GetPokemonSpeciesById")]

@@ -79,6 +79,16 @@
           "PokemonSpecies"
         ],
         "operationId": "GetPokemonSpecies",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -622,8 +632,7 @@
           "types": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/PokemonTypeDto"
             }
           },
           "base_stats": {

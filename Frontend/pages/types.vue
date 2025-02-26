@@ -98,7 +98,7 @@
                 variant="flat"
                 @click="
                   async () => {
-                    await deleteTypeById(item.id);
+                    await deleteTypeById(item.id!);
                     isActive.value = false;
                   }
                 "
@@ -118,7 +118,6 @@
 import { FormsUpsertPokemonType } from "#components";
 import { refDebounced } from "@vueuse/core";
 import type { UpsertPokemonType } from "~/components/forms/upsert-pokemon-type.vue";
-
 const search = ref("");
 const debouncedSearch = refDebounced(search, 1000);
 const headers = [

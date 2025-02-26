@@ -17,9 +17,15 @@ public class PokemonSpeciesRepository(MonDexSharpDbContext dbContext) : IPokemon
         _ = await dbContext.SaveChangesAsync();
         return model.ToDomain();
     }
-    public async Task<IEnumerable<PokemonSpecies>> All()
+    public async Task<IEnumerable<PokemonSpecies>> All(string? query = null)
     {
-        return (await AllQuery().ToArrayAsync()).Select(static m => m.ToDomain());
+        return (await AllQuery()
+              .Where(t =>
+                query == null ||
+                t.Name.Contains(query!) ||
+                t.Genera.Contains(query!) ||
+                t.Description.Contains(query!))
+              .ToArrayAsync()).Select(static m => m.ToDomain());
     }
     public async Task<bool> AnyWithTypeId(int typeId)
     {

@@ -26,7 +26,8 @@
             />
             <v-list-item
               title="Species"
-              color="disabled"
+              to="/species"
+              color="primary"
               prepend-icon="mdi-cube"
             />
           </v-list-group>
