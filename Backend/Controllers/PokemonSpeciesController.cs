@@ -26,7 +26,7 @@ public class PokemonSpeciesController(IPokemonSpeciesRepository speciesRepositor
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<PokemonSpeciesDto>>> Index()
     {
-        return Ok(await speciesRepository.All());
+        return Ok((await speciesRepository.All()).Select(static m => new PokemonSpeciesDto(m)));
     }
 
     [HttpGet("{id}", Name = "GetPokemonSpeciesById")]
